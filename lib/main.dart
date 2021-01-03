@@ -54,16 +54,7 @@ class MyApp extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(fontSize: 14),
       ),
-      trailing: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(
-            Icons.star,
-            color: Colors.yellow,
-          ),
-          Text("10")
-        ],
-      ),
+      trailing: FavoritWidget(),
     ),
   );
 
@@ -108,3 +99,59 @@ class MyApp extends StatelessWidget {
     ),
   );
 }
+
+class FavoritWidget extends StatefulWidget {
+  @override
+  _FavoritWidgetState createState() => _FavoritWidgetState();
+}
+
+class _FavoritWidgetState extends State<FavoritWidget> {
+  bool _isFavorite = false;
+  int _favoriteCount = 44;
+
+  // handler
+  void _handlerFavorite() {
+    setState(() {
+      if (_isFavorite) {
+        _isFavorite = false;
+        _favoriteCount -= 1;
+      } else {
+        _isFavorite = true;
+        _favoriteCount += 1;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      // crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      // mainAxisSize: MainAxisSize.max,
+      children: [
+        Flexible(
+          child: IconButton(
+              icon: _isFavorite
+                  ? Icon(Icons.favorite)
+                  : Icon(Icons.favorite_border),
+              color: Colors.yellow[900],
+              onPressed: _handlerFavorite),
+        ),
+        Container(
+          child: Text("$_favoriteCount"),
+        ),
+      ],
+    );
+  }
+}
+
+// Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: <Widget>[
+//           Icon(
+//             Icons.star,
+//             color: Colors.yellow,
+//           ),
+//           Text("10")
+//         ],
+//       )

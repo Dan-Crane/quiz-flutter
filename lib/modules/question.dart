@@ -8,7 +8,27 @@ class Question {
 }
 
 class QuestionData {
-  final data = [
+  final _data = [
+    Question(title: "title 1", ansvers: [
+      {"ansver": "Кем стать?", "isTrue": "true"},
+      {"ansver": "two"},
+      {"ansver": "three"},
+    ]),
+    Question(title: "title 2", ansvers: [
+      {"ansver": "one", "isTrue": "true"},
+      {"ansver": "two"},
+      {"ansver": "three"},
+    ]),
+    Question(title: "title 1", ansvers: [
+      {"ansver": "one", "isTrue": "true"},
+      {"ansver": "two"},
+      {"ansver": "three"},
+    ]),
+    Question(title: "title 2", ansvers: [
+      {"ansver": "one", "isTrue": "true"},
+      {"ansver": "two"},
+      {"ansver": "three"},
+    ]),
     Question(title: "title 1", ansvers: [
       {"ansver": "one", "isTrue": "true"},
       {"ansver": "two"},
@@ -20,4 +40,6 @@ class QuestionData {
       {"ansver": "three"},
     ]),
   ];
+
+  List<Question> get questions => [..._data];
 }

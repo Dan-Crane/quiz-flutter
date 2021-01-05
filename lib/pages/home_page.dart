@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/modules/question.dart';
 import 'package:quiz/widgets/answer.dart';
+import 'package:quiz/widgets/progress_bar.dart';
+import 'package:quiz/widgets/quize.dart';
+import 'package:quiz/widgets/result.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,13 +14,31 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final QuestionData data = QuestionData();
   int _countResult = 0;
-  int _questionInd = 0;
+  int _questionIdx = 0;
+
+  List<Icon> _icons = [];
+
+  void _clearState() => setState(() {
+        _questionIdx = 0;
+        _countResult = 0;
+        _icons = [];
+      });
+
+  void _handlerAnswer(bool isCorrect) => setState(() {
+        if (isCorrect) {
+          _icons.add(Icon(Icons.brightness_1, color: Colors.green[200]));
+          _countResult++;
+        } else {
+          _icons.add(Icon(Icons.brightness_1, color: Colors.red[200]));
+        }
+        _questionIdx++;
+      });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFBDECB6),
+        backgroundColor: Color(0xFF7fd29b),
         title: Text(
           "Вопросики вопросы",
           style: Theme.of(context).textTheme.caption,
@@ -26,7 +47,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
-          color: Color(0xFFFFFAFA),
+          color: Color(0xFFFDF5DB),
           image: DecorationImage(
             image: AssetImage("assets/images/005-llama.png"),
             fit: BoxFit.fitWidth,
@@ -35,19 +56,22 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(
-                top: 15,
-                bottom: 10,
-              ),
-              child: Text(
-                "Вопрос",
-                style: Theme.of(context).textTheme.caption,
-              ),
+            ProgressBar(
+              icons: _icons,
+              total: data.questions.length,
+              count: _countResult,
             ),
-            Answer(),
-            Answer(),
-            Answer(),
+            _questionIdx != data.questions.length
+                ? Quize(
+                    idx: _questionIdx,
+                    questionData: data,
+                    handlerAnswer: _handlerAnswer,
+                  )
+                : Result(
+                    count: _countResult,
+                    total: data.questions.length,
+                    handlerReset: _clearState,
+                  ),
           ],
         ),
       ),

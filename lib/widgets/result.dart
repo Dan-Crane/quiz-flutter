@@ -15,14 +15,19 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String text = "";
+    Image img = Image.asset('assets/images/001-antara.png');
 
-    if (0 >= count && count <= (total * 0.4).round())
+    if (0 >= count && count <= (total * 0.4).round()) {
       text = "Нет, ты шутишь?!";
-    else if ((total * 0.4).round() + 1 >= count &&
-        count <= (total * 0.8).round())
+      img = Image.asset('assets/images/002-cathedral-of-lima.png');
+    } else if ((total * 0.4).round() + 1 >= count &&
+        count <= (total * 0.8).round()) {
       text = "Ну это куда не шло...";
-    else
+      img = Image.asset('assets/images/001-antara.png');
+    } else {
       text = "Просто лучший!";
+      img = Image.asset('assets/images/006-coca-tea.png');
+    }
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -43,7 +48,7 @@ class Result extends StatelessWidget {
             width: 140,
             height: 140,
             child: FittedBox(
-              child: Image.asset("assets/images/001-antara.png"),
+              child: img,
               fit: BoxFit.contain,
             ),
           ),

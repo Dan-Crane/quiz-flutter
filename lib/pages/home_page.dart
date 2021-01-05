@@ -1,7 +1,6 @@
 // core
 import 'package:flutter/material.dart';
 import 'package:quiz/modules/question.dart';
-import 'package:quiz/widgets/answer.dart';
 import 'package:quiz/widgets/progress_bar.dart';
 import 'package:quiz/widgets/quize.dart';
 import 'package:quiz/widgets/result.dart';
@@ -37,42 +36,40 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF7fd29b),
-        title: Text(
-          "Вопросики вопросы",
-          style: Theme.of(context).textTheme.caption,
-        ),
-      ),
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        decoration: BoxDecoration(
-          color: Color(0xFFFDF5DB),
-          image: DecorationImage(
-            image: AssetImage("assets/images/005-llama.png"),
-            fit: BoxFit.fitWidth,
-            alignment: AlignmentDirectional.bottomCenter,
-          ),
-        ),
-        child: Column(
-          children: [
-            ProgressBar(
-              icons: _icons,
-              total: data.questions.length,
-              count: _countResult,
+      body: SafeArea(
+        child: DefaultTextStyle.merge(
+          style: TextStyle(fontSize: 24),
+          child: Container(
+            constraints: BoxConstraints.expand(),
+            decoration: BoxDecoration(
+              color: Color(0xFFFDF5DB),
+              image: DecorationImage(
+                image: AssetImage("assets/images/005-llama.png"),
+                fit: BoxFit.fitWidth,
+                alignment: AlignmentDirectional.bottomCenter,
+              ),
             ),
-            _questionIdx != data.questions.length
-                ? Quize(
-                    idx: _questionIdx,
-                    questionData: data,
-                    handlerAnswer: _handlerAnswer,
-                  )
-                : Result(
-                    count: _countResult,
-                    total: data.questions.length,
-                    handlerReset: _clearState,
-                  ),
-          ],
+            child: Column(
+              children: [
+                ProgressBar(
+                  icons: _icons,
+                  total: data.questions.length,
+                  count: _countResult,
+                ),
+                _questionIdx != data.questions.length
+                    ? Quize(
+                        idx: _questionIdx,
+                        questionData: data,
+                        handlerAnswer: _handlerAnswer,
+                      )
+                    : Result(
+                        count: _countResult,
+                        total: data.questions.length,
+                        handlerReset: _clearState,
+                      ),
+              ],
+            ),
+          ),
         ),
       ),
     );

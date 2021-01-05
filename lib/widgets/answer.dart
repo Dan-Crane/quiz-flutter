@@ -27,7 +27,7 @@ class Answer extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           gradient: LinearGradient(colors: [
             Color(0xFFF3E8CB),
-            Color(0xFFF3E8CB),
+            Color(0xFFf8debb),
           ]),
         ),
         child: Text("$title"),

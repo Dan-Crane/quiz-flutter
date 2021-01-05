@@ -25,7 +25,6 @@ class Quize extends StatelessWidget {
           ),
           child: Text(
             "${questionData.questions[idx].title}",
-            style: Theme.of(context).textTheme.caption,
           ),
         ),
         ...questionData.questions[idx].ansvers

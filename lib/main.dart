@@ -1,6 +1,7 @@
 // core
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+import 'package:google_fonts/google_fonts.dart';
 
 // pages
 import 'package:quiz/pages/home_page.dart';
@@ -16,12 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Quiz",
       theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          textTheme: TextTheme(
-              caption: TextStyle(
-            color: Color(0xFF1C1C1C),
-            fontSize: 18,
-          ))),
+        primarySwatch: Colors.deepPurple,
+        textTheme: GoogleFonts.notoSansTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
       home: HomePage(),
     );
   }
